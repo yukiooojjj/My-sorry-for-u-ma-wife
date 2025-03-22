@@ -1,0 +1,366 @@
+<meta name='viewport' content='width=device-width, initial-scale=1'/><!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>I'm Sorry Toqa, I Love You</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #ffe6f2;
+            overflow-x: hidden;
+            perspective: 1000px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 50px;
+            transform-style: preserve-3d;
+            transition: transform 0.5s ease;
+        }
+        
+        .title {
+            font-size: 4rem;
+            color: #ff66a3;
+            text-shadow: 3px 3px 0px #ffccdd;
+            margin-bottom: 20px;
+            transform: translateZ(50px);
+            animation: float 3s ease-in-out infinite;
+        }
+        
+        .subtitle {
+            font-size: 2rem;
+            color: #ff99c2;
+            transform: translateZ(30px);
+            animation: float 3s ease-in-out infinite;
+            animation-delay: 0.5s;
+        }
+        
+        .heart-container {
+            text-align: center;
+            margin: 40px 0;
+        }
+        
+        .heart {
+            color: #ff3366;
+            font-size: 8rem;
+            display: inline-block;
+            animation: pulse 1.5s ease-in-out infinite;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+        
+        .heart:hover {
+            transform: scale(1.2);
+        }
+        
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+        
+        .card {
+            background-color: white;
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            transform-style: preserve-3d;
+            transform: translateZ(0) rotateX(0) rotateY(0);
+        }
+        
+        .card:hover {
+            transform: translateZ(20px) rotateX(5deg) rotateY(5deg);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+        }
+        
+        .card img {
+            width: 100%;
+            border-radius: 10px;
+            margin-bottom: 15px;
+            transition: transform 0.5s ease;
+        }
+        
+        .card:hover img {
+            transform: scale(1.05);
+        }
+        
+        .card h3 {
+            font-size: 1.5rem;
+            color: #ff66a3;
+            margin-bottom: 10px;
+        }
+        
+        .card p {
+            color: #666;
+            line-height: 1.5;
+        }
+        
+        .message {
+            text-align: center;
+            margin: 50px 0;
+            padding: 30px;
+            background-color: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+            transform-style: preserve-3d;
+            transition: transform 0.5s ease;
+        }
+        
+        .message:hover {
+            transform: translateZ(30px);
+        }
+        
+        .message h2 {
+            font-size: 2rem;
+            color: #ff66a3;
+            margin-bottom: 20px;
+        }
+        
+        .message p {
+            font-size: 1.2rem;
+            color: #666;
+            line-height: 1.8;
+            margin-bottom: 15px;
+        }
+        
+        .footer {
+            text-align: center;
+            margin-top: 100px;
+            padding: 20px;
+            color: #ff99c2;
+        }
+        
+        @keyframes float {
+            0% {
+                transform: translateZ(30px) translateY(0);
+            }
+            50% {
+                transform: translateZ(30px) translateY(-10px);
+            }
+            100% {
+                transform: translateZ(30px) translateY(0);
+            }
+        }
+        
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.1);
+            }
+            100% {
+                transform: scale(1);
+            }
+        }
+        
+        .falling-hearts {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+        }
+        
+        .falling-heart {
+            position: absolute;
+            color: rgba(255, 102, 163, 0.5);
+            font-size: 1.5rem;
+            animation: fall linear infinite;
+        }
+        
+        @keyframes fall {
+            0% {
+                transform: translateY(-100px) rotate(0deg);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(100vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+        
+        .button-3d {
+            display: inline-block;
+            padding: 15px 30px;
+            background: linear-gradient(145deg, #ff99c2, #ff66a3);
+            color: white;
+            font-size: 1.2rem;
+            font-weight: bold;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            box-shadow: 0 10px 20px rgba(255, 102, 163, 0.4);
+            transition: all 0.3s ease;
+            transform: translateZ(10px);
+            margin-top: 20px;
+            text-decoration: none;
+        }
+        
+        .button-3d:hover {
+            transform: translateZ(20px) scale(1.05);
+            box-shadow: 0 15px 30px rgba(255, 102, 163, 0.6);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1 class="title">I'm Sorry Toqa</h1>
+            <h2 class="subtitle">I Love You</h2>
+        </div>
+        
+        <div class="heart-container">
+            <div class="heart" id="heart">❤️</div>
+        </div>
+        
+        <div class="message">
+            <h2>My Apology</h2>
+            <p>Toqa, I'm truly sorry for any pain I might have caused you.</p>
+            <p>You mean the world to me, and I never meant to hurt you.</p>
+            <p>Please forgive me and let's make things right again.</p>
+            <p>I promise to be better and to always cherish our time together.</p>
+            <a href="#" class="button-3d" id="forgiveButton">Forgive Me?</a>
+        </div>
+        
+        <div class="grid">
+            <div class="card">
+                <img src="https://i.ibb.co/cKDYcKwk/IMG-0088.jpg">
+                <h3>احنا كدا دايما</h3>
+                <p>بس لا اوعي تفكري يام عيالي اني اقدر استغني عنك Every moment with you is precious to me. I treasure all of our memories together.</p>
+            </div>
+            <div class="card">
+                <img src="https://i.ibb.co/V0B0PLRd/IMG-0089.jpg" alt="احنا">
+                <h3>مستقبلنا يام عيالي</h3>
+                <p>I look forward to creating more beautiful memories with you in our future together.</p>
+            </div>
+            <div class="card">
+                <img src="https://i.ibb.co/6JXHJ8MX/IMG-0091.jpg" alt="">
+                <h3>انا حامل ياتقى</h3>
+                <p>انا حامل ياتقى ولو مشيتي وسبتيني تبقي مفتريه طب والواد اللي فبطني .</p>
+            </div>
+        </div>
+        
+        <div class="footer">
+            <p>Made with ❤️ for ام العيال اللي بعشقها</p>
+        </div>
+    </div>
+    
+    <div class="falling-hearts" id="fallingHearts"></div>
+    
+    <script>
+        // Create falling hearts background
+        const fallingHearts = document.getElementById('fallingHearts');
+        const heartSymbols = ['❤️', '💕', '💖', '💗', '💓'];
+        
+        function createHeart() {
+            const heart = document.createElement('div');
+            heart.classList.add('falling-heart');
+            heart.textContent = heartSymbols[Math.floor(Math.random() * heartSymbols.length)];
+            heart.style.left = Math.random() * 100 + 'vw';
+            heart.style.animationDuration = Math.random() * 5 + 3 + 's';
+            heart.style.fontSize = Math.random() * 2 + 1 + 'rem';
+            fallingHearts.appendChild(heart);
+            
+            // Remove hearts after animation completes
+            setTimeout(() => {
+                heart.remove();
+            }, 8000);
+        }
+        
+        // Create hearts at regular intervals
+        setInterval(createHeart, 300);
+        
+        // 3D effect for cards on mouse move
+        document.querySelectorAll('.card').forEach(card => {
+            card.addEventListener('mousemove', (e) => {
+                const rect = card.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                const xRotation = (y - rect.height / 2) / 10;
+                const yRotation = (x - rect.width / 2) / -10;
+                
+                card.style.transform = `
+                    translateZ(20px)
+                    rotateX(${xRotation}deg)
+                    rotateY(${yRotation}deg)
+                `;
+            });
+            
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = 'translateZ(0) rotateX(0) rotateY(0)';
+            });
+        });
+        
+        // Heart click effect
+        const heart = document.getElementById('heart');
+        heart.addEventListener('click', () => {
+            heart.style.transform = 'scale(1.5)';
+            
+            // Create a burst of hearts
+            for (let i = 0; i < 20; i++) {
+                createHeart();
+            }
+            
+            setTimeout(() => {
+                heart.style.transform = 'scale(1)';
+            }, 300);
+        });
+        
+        // Forgive button effect
+        const forgiveButton = document.getElementById('forgiveButton');
+        forgiveButton.addEventListener('click', (e) => {
+            e.preventDefault();
+            
+            // Create a popup message
+            const popup = document.createElement('div');
+            popup.style.position = 'fixed';
+            popup.style.top = '50%';
+            popup.style.left = '50%';
+            popup.style.transform = 'translate(-50%, -50%)';
+            popup.style.background = 'white';
+            popup.style.padding = '30px';
+            popup.style.borderRadius = '15px';
+            popup.style.boxShadow = '0 10px 30px rgba(0, 0, 0, 0.3)';
+            popup.style.zIndex = '1000';
+            popup.style.textAlign = 'center';
+            
+            popup.innerHTML = `
+                <h2 style="color: #ff66a3; margin-bottom: 20px;">Thank You!</h2>
+                <p style="color: #666; margin-bottom: 20px; font-size: 1.2rem;">Your forgiveness means everything to me.</p>
+                <p style="color: #666; margin-bottom: 20px; font-size: 1.2rem;">I love you, Toqa! ❤️</p>
+                <button style="padding: 10px 20px; background: #ff66a3; color: white; border: none; border-radius: 50px; cursor: pointer;">Close</button>
+            `;
+            
+            document.body.appendChild(popup);
+            
+            // Create a burst of hearts
+            for (let i = 0; i < 50; i++) {
+                createHeart();
+            }
+            
+            // Close popup on button click
+            popup.querySelector('button').addEventListener('click', () => {
+                popup.remove();
+            });
+        });
+    </script>
+</body>
+</html>
